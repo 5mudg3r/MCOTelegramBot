@@ -10,3 +10,4 @@ start|handlers/start/start.sh
 tslist|handlers/tslist/tslist.py
 update|handlers/vote/update.sh
 vote|handlers/vote/vote.sh
+youtube|handlers/youtube/youtube.py
