@@ -1,13 +1,20 @@
 #!/usr/bin/env python
-# Give a list of players online
+# Lists the players currently on teamspeak
 
-import urllib2
+TSLIST_LOCATION = "/home/minecraft/teamspeaklist.txt"
+TSLIST_OUTPUT = "{count} players currently on TeamSpeak: {players}"
 
-LIST_ENDPOINT = "http://minecraftonline.com/cgi-bin/getplayerlist.sh"
-LIST_OUTPUT = "{count} players online: {players}"
+players = []
 
-players = urllib2.urlopen(LIST_ENDPOINT).read()
+try:
+	f = open(TSLIST_LOCATION, 'r')
 
-count = len(players.split(","))
-
-print LIST_OUTPUT.format(count = count, players = players)
+	for line in f:
+		players.append(line.strip())
+finally:
+	f.close()
+	
+if len(players) == 0:
+	print("Nobody on TeamSpeak right now")
+else:
+	print TSLIST_OUTPUT.format(count = len(players), players = ", ".join(players))
